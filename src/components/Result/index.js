@@ -26,7 +26,7 @@ export default function Result(props){
                         source={require('../../../assets/gas.png')}
                         style={styles.imagem}
                         />
-                        <Text style={styles.titulo1}>Conpensa usar {props.result<=0.7? 'Álcool':'Gasolina'}</Text>
+                        <Text style={styles.titulo1}>Compensa usar {props.result<=0.7? 'Álcool':'Gasolina'}</Text>
                         <Text style={styles.titulo2}>Com os preços:</Text>
                         <Text style={styles.precosComb}>Álcool: {props.alcool}</Text>
                         <Text style={styles.precosComb}>Gasolina: {props.gasolina}</Text>    
@@ -56,7 +56,7 @@ const styles= StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop: 22,
+        // marginTop: 22,
         backgroundColor: '#000',
     },
     modalView: {
@@ -69,27 +69,49 @@ const styles= StyleSheet.create({
       
       },
     imagem:{
+        marginBottom:20
 
     },
     titulo1:{
+        color:"green",
+        fontSize:30,
+        marginBottom:40
 
     },
     titulo2:{
+        color:'#fff',
+        marginBottom:10,
+        fontSize:30
+        
 
     },
     precosComb:{
+        color:'#fff',
+        fontSize:25,
+        marginBottom:10
+
 
     },
     
     buttoArea:{
         borderColor:"#fa3c08",
         borderWidth:3,
+        marginTop:30,
+        width:250,
+        height:50,
+        alignItems:'center',
+        justifyContent:'center',
+        borderRadius:10
+        
+
 
 
 
     },
     buttonText:{
-        color:'#fa3c08'
+        color:'#fa3c08',
+        fontSize:20,
+        fontWeight:'bold'
 
     }
 

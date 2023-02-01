@@ -14,6 +14,8 @@ export default function Main(){
         try {
            let resultado= parseFloat(alcool)/parseFloat(gasolina);
         //    alert('O resultado é: '+ resultado.toFixed(2))
+
+            
             setResult(resultado);
             setModalVisible(true);
         } catch (error) {
@@ -30,7 +32,7 @@ export default function Main(){
                 setVisible={setModalVisible} 
                 alcool={alcool} 
                 gasolina={gasolina}
-                resul={result}
+                result={result}
             
             />
             <View style={styles.cabecalho}>
