@@ -1,27 +1,48 @@
 import React from "react";
 import{View,Image,Text,StyleSheet,TextInput, TouchableOpacity} from 'react-native';
-import { useState } from 'react';
+import { useState,useRef } from 'react';
 import Result from "../Result";
 
 
 export default function Main(){
-    const[alcool,setAlcool]=useState(0);
-    const[gasolina,setGasolina]=useState(0);
+    const[alcool,setAlcool]=useState(0.00);
+    const[gasolina,setGasolina]=useState(0.00);
     const[modalVisible,setModalVisible]=useState(false);
-    const[result,setResult] = useState(0);
+    const[result,setResult] = useState(0.00);
+    const inpAlcool =useRef(0);
+    const inpGasolina = useRef(0);
 
     function calcular(){
         try {
-           let resultado= parseFloat(alcool)/parseFloat(gasolina);
-        //    alert('O resultado é: '+ resultado.toFixed(2))
+            // let valAlcool=inpAlcool.current.toString().replace(',','.');
+            // let valGasolina=inpGasolina.current.toString().replace(',','.');
+            let resultado= parseFloat(alcool)/parseFloat(gasolina);
+            // console.log(inpAlcool.current)
+            // console.log(valGasolina)    
+            // console.log(resultado)
+            if(!isNaN(resultado)){
+                setResult(resultado.toFixed(2));
+                // setAlcool(parseFloat(valAlcool))
+                // setGasolina(parseFloat(valGasolina))
+                setModalVisible(true);
 
+                return;
+            }
+    
+            alert('Os valores fornecidos são inválidos!');
             
-            setResult(resultado);
-            setModalVisible(true);
         } catch (error) {
-            alert('Os valores fornecidos são inválidos!')
-        }
+            alert('Ocorreu o seguinte erro: '+error);
+        }   
+       
         
+    }
+
+    function limpaForm(){
+        inpAlcool.current.clear();
+        inpGasolina.current.clear();
+        inpAlcool.current.focus();
+        // Keyboard.
     }
     
 
@@ -30,9 +51,10 @@ export default function Main(){
             <Result 
                 Visible={modalVisible} 
                 setVisible={setModalVisible} 
-                alcool={alcool} 
-                gasolina={gasolina}
+                alcool={Number(alcool).toFixed(2)} 
+                gasolina={Number(gasolina).toFixed(2)}
                 result={result}
+                limaForm={limpaForm}
             
             />
             <View style={styles.cabecalho}>
@@ -50,8 +72,11 @@ export default function Main(){
                     keyboardType='numeric'
                     value={alcool}
                     onChangeText={setAlcool}
+                    // defaultValue="0.00"
                     inputMode='numeric'
                     maxLength={5}
+                    placeholder='Ex.: 3.59'
+                    ref={inpAlcool}
                 />
                 <Text style={styles.labels}>Gasolina(preço por litro):</Text>
                 <TextInput
@@ -61,6 +86,8 @@ export default function Main(){
                     value={gasolina}
                     onChangeText={setGasolina}
                     maxLength={5}
+                    placeholder='Ex.: 4.99'
+                    ref={inpGasolina}
                 />
                 <TouchableOpacity
                     style={styles.buttonArea}

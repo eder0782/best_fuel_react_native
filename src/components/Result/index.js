@@ -32,7 +32,11 @@ export default function Result(props){
                         <Text style={styles.precosComb}>Gasolina: {props.gasolina}</Text>    
                         <TouchableOpacity
                             style={styles.buttoArea}  
-                            onPress={()=>props.setVisible(!props.Visible)}                  
+                            onPress={()=>{
+                                props.limaForm();
+                                props.setVisible(!props.Visible);
+                            
+                            }}                  
                         >
                             <Text style={styles.buttonText}>Calcular Novamente</Text>
 
